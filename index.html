@@ -30,19 +30,26 @@
       </div><!-- End hero -->
 
       <div class="form-container">
-        <form>
+        <form method="POST" action="https://revolutionconf.activehosted.com/proc.php">
+          <input type="hidden" name="u" value="21" />
+          <input type="hidden" name="f" value="21" />
+          <input type="hidden" name="s" />
+          <input type="hidden" name="c" value="0" />
+          <input type="hidden" name="m" value="0" />
+          <input type="hidden" name="act" value="sub" />
+          <input type="hidden" name="v" value="2" />
           <h2 class="subheader"><span>Get Notified</span></h2>
 
           <div class="name">
-            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="fullname" placeholder="Name">
           </div>
 
           <div class="email">
-            <input type="text" name="email" placeholder="Email">
+            <input type="email" name="email" placeholder="Email">
           </div>
 
           <div class="button">
-            <a href="">Submit</a>
+            <input type="submit" />
           </div><!-- End button -->
 
         </form><!-- End form -->
