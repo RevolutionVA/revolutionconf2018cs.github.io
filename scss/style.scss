@@ -1,0 +1,460 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background:  #000000;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+img { max-width: 100%; }
+
+/* IMAGES */
+$hero-image: url('../images/revconf_hero.jpg');
+$title-image: url('../images/title.png');
+$footer-image: url('../images/footer-pic.jpg');
+
+
+/* COLOR VARIABLES */
+$color-white: #fff;
+$color-gray: #aaa;
+$color-red: #a80000;
+
+/* FONT VARIABLES */
+$exo: 'Exo', sans-serif;
+$open-sans: 'Open Sans', sans-serif;
+
+/* MIXINS */
+@mixin cover-background($img-uri) {
+    background: url($img-uri) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+@mixin background($imgpath,$position:0 0,$repeat: no-repeat) {
+    background: {
+        image: url($imgpath);
+        position: $position;
+        repeat: $repeat;
+    }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+
+/* Turn colored images to grayscale */
+@mixin black-and-white() {
+	filter: grayscale(100%);
+}
+
+/* RESPONSIVE */
+$phone : '(max-width: 480px)';
+$tablet-portrait: '(max-width: 767px)';
+$tablet-landscape: '(min-width: 768px) and (max-width: 979px)';
+$desktop: '(min-width: 1024px)';
+$large-desktop: '(min-width: 1200px)';
+$non-retina: 'screen and (-webkit-max-device-pixel-ratio: 1)';
+$retina: '(min--moz-device-pixel-ratio: 1.5),
+                    (-o-min-device-pixel-ratio: 3/2),
+                    (-webkit-min-device-pixel-ratio: 1.5),
+                    (min-device-pixel-ratio: 1.5),
+                    (min-resolution: 144dpi),
+                    (min-resolution: 1.5dppx)';
+
+@mixin respond-to($media) {
+    @media only screen and #{$media} {
+        @content;
+    }
+}
+
+
+/* TYPOGRAPHY */
+a, h1, h2, h3, h4, h5, p {
+  letter-spacing: 1px;
+  color: $color-white;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: 600;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+h4, h5 {
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+p {
+  font-weight: 300;
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+}
+
+.container {
+  /*max-width: 1170px;*/
+  margin-left: auto;
+  margin-right: auto;
+
+
+  .wrapper {
+    /*display: grid;*/
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+
+    .hero {
+
+      @include cover-background('../images/revconf_hero.jpg');
+
+      .header-title {
+        padding-top: 7rem;
+        width: 80%;
+        margin: 0 auto;
+        height: auto;
+
+        @include respond-to($tablet-portrait) {
+          margin-bottom: 2rem;
+        }/* End @include respond-to($tablet-portrait)*/
+
+        @include respond-to($desktop) {
+          margin-bottom: 2rem;
+          width: 50%;
+        }/* End @include respond-to($desktop)*/
+      }/* End header-title */
+
+      .date, .location {
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        padding-bottom: 1rem;
+
+        h2 {
+          font-size: 1.3rem;
+        }
+
+        p {
+          font-size: 1rem;
+          line-height: 1.4rem;
+          margin-bottom: 2rem;
+          padding: 0 1.5rem;
+        }
+
+        @include respond-to($tablet-portrait) {
+          h2, p {
+            margin: .5rem 0;
+          }
+        }/* End @include respond-to($tablet-portrait)*/
+
+        @include respond-to($desktop) {
+          h2, p {
+            margin: .5rem 0;
+          }
+        }/* End @include respond-to($desktop)*/
+
+      }/* End location */
+    }/* End hero */
+
+    .form-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+      padding: 0 1rem;
+      margin-top: 1rem;
+      text-align: center;
+
+      h2.subheader {
+        font-family: $exo;
+        font-size: 1.5rem;
+        font-weight: 200;
+        text-align: center;
+
+        @include respond-to($desktop) {
+          font-size: 2rem;
+        }/* End @include respond-to($desktop)*/
+
+        span {
+          padding-bottom: .5rem;
+          border-bottom: 2px solid $color-white;
+        }
+      }/* End h2.subheader */
+
+      form {
+        grid-column: 1/5;
+
+        .name, .email {
+
+          input {
+            width: 250px;
+            padding: .9rem;
+            margin: .5rem 0;
+            border: 0;
+            font-size: 1rem;
+            @include border-radius(3px);
+
+            @include respond-to($desktop) {
+              width: 400px;
+            }
+
+          }/* End input*/
+        }/* End name, email */
+
+        .button {
+          display: grid;
+          justify-items: center;
+
+          a {
+            text-align: center;
+            width: 250px;
+            font-weight: 600;
+            color: $color-white;
+            background: $color-red;
+            padding: .9rem .7rem .7rem .7rem;
+            margin: 1.5rem 0;
+            @include border-radius(3px);
+
+            @include transition(background-color .5s);
+
+            &:hover {
+              background: lighten($color-red, 30%);
+            }
+          }/* End a */
+
+        }/* End button */
+      }/* End form */
+    }/* End form-container */
+
+    .organizer-container {
+      width: 80%;
+      margin: 0 auto;
+
+      .organizer-text {
+        /*padding: 0 12rem;*/
+        @include respond-to($tablet-portrait) {
+          margin: 3rem 0;
+        }/* End @include respond-to($tablet-portrait)*/
+
+        @include respond-to($desktop) {
+          margin: 3rem 0;
+        }/* End @include respond-to($desktop)*/
+
+        h2.subheader {
+          font-family: $exo;
+          font-size: 1.5rem;
+          font-weight: 200;
+          text-align: center;
+
+          @include respond-to($desktop) {
+            font-size: 2rem;
+          }/* End @include respond-to($desktop)*/
+
+          span {
+            padding-bottom: .5rem;
+            border-bottom: 2px solid $color-white;
+          }
+        }/* End h2.subheader */
+
+        p {
+          font-size: 1rem;
+          line-height: 1.5rem;
+          margin: 2rem 0;
+
+          @include respond-to($desktop) {
+            font-size: 1.3rem;
+            line-height: 2rem;
+          }/* End @include respond-to($desktop)*/
+
+        }/* End p */
+
+      }/* End organizer-text */
+
+      .organizers {
+
+        @include respond-to($desktop) {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          justify-items: center;
+        }/* End @include respond-to($desktop)*/
+
+        .box {
+          margin-bottom: 2rem;
+          display: grid;
+          justify-items: center;
+
+          .pic {
+            @include black-and-white;
+            margin-bottom: 1rem;
+
+            @include respond-to($tablet-portrait) {
+              display: grid;
+              justify-content: center;
+            }/* End @include respond-to($tablet-portrait)*/
+
+            @include respond-to($tablet-landscape) {
+              display: grid;
+              justify-content: center;
+            }/* End @include respond-to($tablet-landscape)*/
+
+            @include respond-to($desktop) {
+
+            }/* End @include respond-to($desktop)*/
+          }/* End pic */
+
+          .text {
+
+            h3, h4, h5 {
+              margin: .1rem;
+              text-align: center;
+            }
+
+            .social-media {
+              display: grid;
+              grid-template-columns: repeat(3, 50px);
+              padding: 1rem 0;
+              justify-content: center;
+
+              > div {
+                display: grid;
+                justify-content: center;
+              }
+
+              .fa {
+                color: $color-gray;
+                font-size: 1.5rem;
+                @include transition(color .5s);
+
+                &:hover {
+                  color: $color-red;
+                }
+              }/* End fa */
+            }/* End social-media */
+          }/* End text */
+        }/* End box */
+      }/* End organizers */
+    }/* End organizer-container */
+
+    .footer {
+      margin: 0 auto;
+      padding: 2rem;
+      @include cover-background('../images/footer-pic.jpg');
+
+      @include respond-to($desktop) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 5rem 7rem;
+        grid-column-gap: 5rem;
+        grid-auto-rows: 100px;
+        height: 700px;
+      }
+
+      @include respond-to($large-desktop) {
+        padding: 5rem 13rem;
+      }
+
+      h2.subheader {
+        font-family: $exo;
+        font-size: 1.5rem;
+        font-weight: 200;
+        text-align: center;
+        margin-bottom: 2rem;
+
+        @include respond-to($desktop) {
+          font-size: 2.5rem;
+          text-align: left;
+          grid-column: 1/3;
+
+        }/* End @include respond-to($desktop)*/
+
+        span {
+          padding-bottom: .5rem;
+          border-bottom: 2px solid $color-white;
+        }
+      }/* End h2.subheader */
+
+      .location-text {
+        text-align: center;
+
+        @include respond-to($desktop) {
+        }
+
+        p {
+          font-size: 1rem;
+          line-height: 1.5rem;
+
+          @include respond-to($desktop) {
+            text-align: left;
+          }
+        }
+      }/* End location-text */
+
+      .location-links {
+        text-align: center;
+        margin: 3rem 0;
+
+        @include respond-to($desktop) {
+          grid-row: 3;
+          text-align: left;
+          padding-top: 2rem;
+        }
+
+        .view-map, .reserve {
+          margin: .5rem 0;
+        }
+
+        a {
+          color: $color-white;
+          @include transition(color .5s);
+
+          @include respond-to($desktop) {
+            color: lighten($color-red, 30%);
+          }
+
+          &:hover {
+            color: lighten($color-red, 30%);
+            text-decoration: underline;
+
+            @include respond-to($desktop) {
+              color: lighten($color-red, 50%);
+            }
+          }/* End hover */
+        }/* End a */
+
+      }/* End location-links */
+
+      .location-description {
+
+        p {
+          font-size: 1rem;
+          line-height: 1.5rem;
+        }
+      }/* End location-description */
+    }/* End footer */
+  }/* End wrapper */
+}/* End container */
