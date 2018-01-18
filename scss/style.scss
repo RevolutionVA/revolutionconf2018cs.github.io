@@ -255,6 +255,22 @@ p {
       width: 80%;
       margin: 0 auto;
 
+      a {
+        text-decoration: underline;
+
+        &:hover {
+          color: $color-red;
+        }
+      }
+
+      .ticket-widget{
+        background-color: #fff;
+
+        a {
+          color: #000000;
+        }
+      }
+
       .organizer-text {
         /*padding: 0 12rem;*/
         @include respond-to($tablet-portrait) {
